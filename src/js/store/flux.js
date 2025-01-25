@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			contactos: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -37,6 +38,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			//Listar mis contactos con método GET
+			traerContactos: () => {
+				fetch("https://playground.4geeks.com/contact/agendas/alex_contact/contacts")
+					.then(data => data.json())
+					.then(response => setStore({ contactos: response.contacts }))
+			},
+			//Añadir contacto con método POST
+			añadirContactos: () => {
+				fetch("https://playground.4geeks.com/contact/agendas/alex_contact/contacts", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(nuevoContacto)
+				})
+			},
+			//Actualizar contacto con método PUT
+			actualizarContacto: () => {
+				fetch(`https://playground.4geeks.com/contact/agendas/alex_contact/contacts/${id}`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(datosActualizados)
+				})
+			},
+			//Eliminar contacto con método DELETE
+			eliminarContacto: () => {
+				fetch(`https://playground.4geeks.com/contact/agendas/alex_contact/contacts/${id}`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
 			}
 		}
 	};
