@@ -1,52 +1,38 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contactos: [],
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contactos: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			//Cargar la agenda llamada "alex_contact" y si no existe, la crea
+			traerAgenda: () => {
+				fetch("https://playground.4geeks.com/contact/agendas/alex_contact")
+					.then(response => {
+						if (response.status === 404) {
+							return fetch("https://playground.4geeks.com/contact/agendas/alex_contact"), {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json"
+								}
+							};
+						} else {
+							return response.json();
+						}
+					})
+					.catch(error => {
+						console.error("Error:", error);
+					});
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
 			//Listar mis contactos con método GET
 			traerContactos: () => {
 				fetch("https://playground.4geeks.com/contact/agendas/alex_contact/contacts")
 					.then(data => data.json())
 					.then(response => setStore({ contactos: response.contacts }))
 			},
+
 			//Añadir contacto con método POST
-			añadirContactos: () => {
+			añadirContactos: (nuevoContacto) => {
 				fetch("https://playground.4geeks.com/contact/agendas/alex_contact/contacts", {
 					method: "POST",
 					headers: {
@@ -54,9 +40,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify(nuevoContacto)
 				})
+				.then(response => response.json())
+				.then(() => {
+					getActions().traerContactos();
+				})
+				.catch(error => console.error("Error:", error));
 			},
+
 			//Actualizar contacto con método PUT
-			actualizarContacto: () => {
+			actualizarContacto: (id, datosActualizados) => {
 				fetch(`https://playground.4geeks.com/contact/agendas/alex_contact/contacts/${id}`, {
 					method: "PUT",
 					headers: {
@@ -64,15 +56,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify(datosActualizados)
 				})
+				.then(() => {
+					getActions().traerContactos(); // Recargar la lista de contactos
+				})
+				.catch(error => console.error("Error:", error));
 			},
+
 			//Eliminar contacto con método DELETE
-			eliminarContacto: () => {
+			eliminarContacto: (id) => {
 				fetch(`https://playground.4geeks.com/contact/agendas/alex_contact/contacts/${id}`, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json"
 					}
 				})
+				.then(() => {
+					getActions().traerContactos(); // Recargar la lista
+				})
+				.catch(error => console.error("Error:", error));
 			}
 		}
 	};
