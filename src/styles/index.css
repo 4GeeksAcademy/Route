@@ -1,8 +1,103 @@
-.delete-btn:hover {
-    background-color: darkred;
-  }
-.contact-card{
-    border: 1px solid black;
-    background-color: rgb(0, 194, 212);
-    color: black;
+body, html {
+  height: 100%;
+  background: linear-gradient(135deg, #ffffff, #00ffe5);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  padding: 1%;
+}
+
+.footer {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  color: white;
+  text-align: center;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+}
+
+.card {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  color: white;
+  border-radius: 20px;
+  margin: 1%;
+  box-shadow: 8px 8px 16px black;
+  text-align: center;
+  width: 18rem;
+  align-items: center;
+}
+
+.lista {
+  text-align: center;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.añadir {
+  background: linear-gradient(90deg, #007bff, #6610f2);
+  color: white;
+  border-radius: 20px;
+  margin: 2%;
+  padding: 2%;
+  box-shadow: 8px 8px 16px black;
+  text-align: center;
+  width: 30rem;
+  height: 24rem;
+  align-items: center;
+}
+
+.editar {
+  position: fixed;
+  background: black;
+  color: white;
+  border-radius: 20px;
+  margin: 1%;
+  padding: 1%;
+  box-shadow: 8px 8px 16px black;
+  text-align: center;
+  width: 30rem;
+  height: 24rem;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.campo {
+  margin: 20px;
+}
+
+.botón {
+  border-radius: 20px;
+  background: #6610f2;
+  color: white;
+  box-shadow: 4px 4px 8px black;
+}
+
+.botón2 {
+  border-radius: 20px;
+  background: #6610f2;
+  color: white;
+  box-shadow: 4px 4px 8px black;
+  opacity: 0;
+}
+
+.botón2:hover {
+  border-radius: 20px;
+  background: #6610f2;
+  color: white;
+  box-shadow: 4px 4px 8px black;
+  opacity: 1;
+}
+
+.formulario {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
