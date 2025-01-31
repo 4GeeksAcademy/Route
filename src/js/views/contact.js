@@ -63,10 +63,8 @@ export const Contact = () => {
               <label htmlFor="address">Dirección</label>
               <input type="text" value={editData.address} onChange={(e) => setEditData({ ...editData, address: e.target.value })} required />
             </div>
-            <div className="campo2">
-              <button type="submit" className="botón btn btn fw-bold mx-2">💾 Guardar</button>
-              <button className="botón btn btn fw-bold mx-2" onClick={() => setEditData(null)}>❌ Cancelar</button>
-            </div>
+            <button type="submit" className="botón btn btn fw-bold mx-2">💾 Guardar</button>
+            <button className="botón btn btn fw-bold mx-2" onClick={() => setEditData(null)}>❌ Cancelar</button>
           </form>
         </div>
       )}
