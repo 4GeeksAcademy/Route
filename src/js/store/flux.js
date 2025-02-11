@@ -9,12 +9,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://playground.4geeks.com/contact/agendas/alex_contact")
 					.then(response => {
 						if (response.status === 404) {
-							return fetch("https://playground.4geeks.com/contact/agendas/alex_contact"), {
+							return fetch("https://playground.4geeks.com/contact/agendas/alex_contact", {
 								method: "POST",
 								headers: {
 									"Content-Type": "application/json"
 								}
-							};
+							});
 						} else {
 							return response.json();
 						}
@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://playground.4geeks.com/contact/agendas/alex_contact/contacts")
 					.then(data => data.json())
 					.then(response => setStore({ contactos: response.contacts }))
+					.catch(error => console.error("Error:", error));
 			},
 
 			//Añadir contacto con método POST
@@ -57,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(datosActualizados)
 				})
 				.then(() => {
-					getActions().traerContactos(); // Recargar la lista de contactos
+					getActions().traerContactos();
 				})
 				.catch(error => console.error("Error:", error));
 			},
@@ -71,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 				.then(() => {
-					getActions().traerContactos(); // Recargar la lista
+					getActions().traerContactos();
 				})
 				.catch(error => console.error("Error:", error));
 			}

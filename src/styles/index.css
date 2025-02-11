@@ -19,6 +19,7 @@ body, html {
   display: flex;
   flex-direction: column;
   padding: 1%;
+  position: relative;
 }
 
 .card {
@@ -28,7 +29,8 @@ body, html {
   margin: 1%;
   box-shadow: 8px 8px 16px black;
   text-align: center;
-  width: 24rem;
+  width: 100%;
+  max-width: 24rem;
   align-items: center;
 }
 
@@ -49,8 +51,9 @@ body, html {
   padding: 2%;
   box-shadow: 8px 8px 16px black;
   text-align: center;
-  width: 30rem;
-  height: 24rem;
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
   align-items: center;
 }
 
@@ -63,8 +66,9 @@ body, html {
   padding: 1%;
   box-shadow: 8px 8px 16px black;
   text-align: center;
-  width: 30rem;
-  height: 24rem;
+  width: 100%;
+  max-width: 30rem;
+  height: auto;
   align-items: center;
   opacity: 0.8;
 }
@@ -100,4 +104,22 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .card, .añadir, .editar {
+    width: 90%;
+    max-width: none;
+    margin: 10px 0;
+  }
+
+  .campo {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .botón, .botón2 {
+    width: 100%;
+    padding: 10px;
+  }
 }
